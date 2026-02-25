@@ -8,7 +8,7 @@ version = "${version}"
 displayName = "Simple Trading"
 authors = "Rvhoyos"
 description = '''
-A server-side player-to-player trading mod with a secure chest-based GUI for Minecraft 1.21.8.
+A server-side player-to-player trading mod with a secure chest-based GUI for Minecraft 1.21.10.
 '''
 issueTrackerURL = "https://github.com/Rvhoyos/SimpleTrading/issues"
 displayURL = "https://github.com/Rvhoyos/SimpleTrading"
@@ -17,14 +17,14 @@ logoFile = "assets/simpletrading/icon.png"
 [[dependencies.simpletrading]]
 modId = "neoforge"
 type = "required"
-versionRange = "[21.8,)"
+versionRange = "[21.10,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.simpletrading]]
 modId = "minecraft"
 type = "required"
-versionRange = "[1.21.8,)"
+versionRange = "[1.21.10,)"
 ordering = "NONE"
 side = "BOTH"
 

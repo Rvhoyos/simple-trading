@@ -71,7 +71,7 @@ public class TradeCommand {
     private static int acceptTrade(CommandContext<CommandSourceStack> context) {
         try {
             ServerPlayer player = context.getSource().getPlayerOrException();
-            TradeManager.getInstance().acceptTrade(player, player.getServer());
+            TradeManager.getInstance().acceptTrade(player, player.level().getServer());
         } catch (Exception e) {
             context.getSource().sendFailure(Component.literal("Failed to accept trade."));
         }
@@ -85,7 +85,7 @@ public class TradeCommand {
     private static int denyTrade(CommandContext<CommandSourceStack> context) {
         try {
             ServerPlayer player = context.getSource().getPlayerOrException();
-            TradeManager.getInstance().denyTrade(player, player.getServer());
+            TradeManager.getInstance().denyTrade(player, player.level().getServer());
         } catch (Exception e) {
             context.getSource().sendFailure(Component.literal("Failed to deny trade."));
         }
