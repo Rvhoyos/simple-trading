@@ -1,0 +1,38 @@
+plugins {
+    id 'fabric-loom'
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
+    mappings loom.layered() {
+        officialMojangMappings()
+        parchment("org.parchmentmc.data:parchment-${rootProject.parchment_mc_version}:${rootProject.parchment_version}@zip")
+    }
+    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+
+    // Common module
+    compileOnly project(':common')
+}
+
+loom {
+    runs {
+        client {
+            runDir 'runs/client'
+            ideConfigGenerated true
+            programArg "--username=Player${new Random().nextInt(10000)}"
+        }
+        server {
+            runDir 'runs/server'
+            ideConfigGenerated true
+        }
+    }
+}
+
+processResources {
+    inputs.property 'version', project.version
+
+    filesMatching('fabric.mod.json') {
+        expand version: inputs.properties.version
+    }
+}

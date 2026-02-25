@@ -1,0 +1,40 @@
+plugins {
+    id 'net.neoforged.moddev'
+}
+
+neoForge {
+    version = rootProject.neoforge_version
+
+    parchment.minecraftVersion = rootProject.parchment_mc_version
+    parchment.mappingsVersion = rootProject.parchment_version
+
+    runs {
+        client {
+            client()
+            programArguments.addAll '--username', "Player${new Random().nextInt(10000)}"
+        }
+        server {
+            server()
+            programArgument '--nogui'
+        }
+    }
+
+    mods {
+        simpletrading {
+            sourceSet project.sourceSets.main
+        }
+    }
+}
+
+dependencies {
+    // Common module
+    compileOnly project(':common')
+}
+
+processResources {
+    inputs.property 'version', project.version
+
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand version: inputs.properties.version
+    }
+}

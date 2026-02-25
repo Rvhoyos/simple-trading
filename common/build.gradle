@@ -1,0 +1,16 @@
+plugins {
+    id 'net.neoforged.moddev'
+}
+
+neoForge {
+    neoFormVersion = rootProject.neoform_version
+
+    parchment.minecraftVersion = rootProject.parchment_mc_version
+    parchment.mappingsVersion = rootProject.parchment_version
+}
+
+dependencies {
+    compileOnly "org.spongepowered:mixin:0.8.7"
+    compileOnly "io.github.llamalad7:mixinextras-common:$rootProject.mixin_extras"
+    compileOnly "com.mojang:brigadier:1.0.500"
+}

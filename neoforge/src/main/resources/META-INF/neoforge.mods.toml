@@ -1,0 +1,32 @@
+modLoader = "javafml"
+loaderVersion = "[9,)"
+license = "Apache-2.0"
+
+[[mods]]
+modId = "simpletrading"
+version = "${version}"
+displayName = "Simple Trading"
+authors = "Rvhoyos"
+description = '''
+A server-side player-to-player trading mod with a secure chest-based GUI for Minecraft 1.21.8.
+'''
+issueTrackerURL = "https://github.com/Rvhoyos/SimpleTrading/issues"
+displayURL = "https://github.com/Rvhoyos/SimpleTrading"
+logoFile = "assets/simpletrading/icon.png"
+
+[[dependencies.simpletrading]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.8,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.simpletrading]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.8,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[mixins]]
+config = "simpletrading.mixins.json"

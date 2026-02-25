@@ -1,0 +1,34 @@
+# Compiled output
+*.class
+*.jar
+*.war
+
+# Gradle
+.gradle/
+build/
+bin/
+
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+.eclipse/
+.settings/
+.project
+.classpath
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Runtime / dev server
+runs/
+run/
+logs/
+crash-reports/
+
+# Misc
+*.log
+*.tmp
