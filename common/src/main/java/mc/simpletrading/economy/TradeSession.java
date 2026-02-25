@@ -206,8 +206,10 @@ public class TradeSession {
         sendMessage(playerA, "\u00a7aTrade completed successfully!");
         sendMessage(playerB, "\u00a7aTrade completed successfully!");
 
-        playerA.playNotifySound(SoundEvents.PLAYER_LEVELUP, SoundSource.MASTER, 1f, 1f);
-        playerB.playNotifySound(SoundEvents.PLAYER_LEVELUP, SoundSource.MASTER, 1f, 1f);
+        playerA.level().playSound(null, playerA.getX(), playerA.getY(), playerA.getZ(), SoundEvents.PLAYER_LEVELUP,
+                SoundSource.MASTER, 1f, 1f);
+        playerB.level().playSound(null, playerB.getX(), playerB.getY(), playerB.getZ(), SoundEvents.PLAYER_LEVELUP,
+                SoundSource.MASTER, 1f, 1f);
     }
 
     /**
