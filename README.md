@@ -5,12 +5,12 @@ Supports both **Fabric** and **NeoForge**.
 
 ## Features
 
-- **Secure chest-based trade GUI** — a shared 6-row chest with one side per player and a centre divider
-- **Anti-scam protection** — ready states reset whenever items are added or removed
-- **Dual confirmation** — trade only executes when both players click "Ready"
-- **Item safety** — closing the GUI or disconnecting cancels the trade and returns all items
-- **Clickable chat buttons** — trade recipients get chat-based `[ACCEPT]` / `[DENY]` buttons
-- **Request expiry** — pending requests expire after 60 seconds
+- **Chest-based trade GUI**: shared 6-row chest with one side per player and a center divider
+- **Anti-scam protection**: ready states reset whenever items are added or removed
+- **Dual confirmation**: trade only executes when both players click "Ready"
+- **Item safety**: closing the GUI or disconnecting cancels the trade and returns all items
+- **Clickable chat buttons**: trade recipients get `[ACCEPT]` / `[DENY]` buttons in chat
+- **Request expiry**: pending requests expire after 60 seconds
 
 ## Commands
 
@@ -24,8 +24,8 @@ Supports both **Fabric** and **NeoForge**.
 
 Drop the mod JAR into your server's `mods/` folder:
 
-- **Fabric** — requires [Fabric Loader](https://fabricmc.net/) ≥ 0.17.2 and [Fabric API](https://modrinth.com/mod/fabric-api)
-- **NeoForge** — requires [NeoForge](https://neoforged.net/) ≥ 21.8
+- **Fabric**: requires [Fabric Loader](https://fabricmc.net/) >= 0.17.2 and [Fabric API](https://modrinth.com/mod/fabric-api)
+- **NeoForge**: requires [NeoForge](https://neoforged.net/) >= 21.8
 
 ## Building from Source
 
