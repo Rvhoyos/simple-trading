@@ -18,20 +18,14 @@ import net.minecraft.world.Container;
  * Mixin into {@link AbstractContainerMenu} that intercepts slot clicks
  * and container closure for trade GUI enforcement.
  *
- * <h3>Click interception</h3>
- * <p>
- * When the open menu is a {@link ChestMenu} backed by a
+ * Click interception: when the open menu is a {@link ChestMenu} backed by a
  * {@link TradeMenuContainer}, all clicks are routed through
  * {@link TradeGui#onClick}. If that method returns {@code true},
  * vanilla click handling is cancelled via {@link CallbackInfo#cancel()}.
- * </p>
  *
- * <h3>Container removal</h3>
- * <p>
- * When a trade container is closed (e.g. the player presses ESC),
- * the associated {@link TradeSession#cancelTrade()} is invoked to
- * return all items to their original owners.
- * </p>
+ * Container removal: when a trade container is closed (e.g. the player
+ * presses ESC), the associated {@link TradeSession#cancelTrade()} is
+ * invoked to return all items to their original owners.
  *
  * @see ChestMenuMixin
  * @see TradeGui#onClick

@@ -11,29 +11,20 @@ import java.util.UUID;
 /**
  * Singleton manager responsible for the full trade lifecycle.
  *
- * <p>
  * Maintains two maps:
- * </p>
- * <ul>
- * <li><b>Pending requests</b> — keyed by the <em>target</em> player's UUID,
- * storing who requested the trade and when. Requests expire after
- * 60 seconds.</li>
- * <li><b>Active sessions</b> — keyed by <em>both</em> participants' UUIDs,
- * pointing to the shared {@link TradeSession}.</li>
- * </ul>
+ * - Pending requests — keyed by the target player's UUID, storing who
+ *   requested the trade and when. Requests expire after 60 seconds.
+ * - Active sessions — keyed by both participants' UUIDs, pointing to
+ *   the shared {@link TradeSession}.
  *
- * <p>
  * Typical flow:
- * </p>
- * <ol>
- * <li>{@link #requestTrade} — creates a pending request and sends
- * clickable ACCEPT / DENY buttons to the target.</li>
- * <li>{@link #acceptTrade} — consumes the pending request, creates a
- * {@link TradeSession}, and opens the GUI via {@link TradeGui#open}.</li>
- * <li>Players interact inside the GUI until both click "Ready".</li>
- * <li>{@link TradeSession#executeTrade} swaps items and calls
- * {@link #removeActiveSession} to clean up.</li>
- * </ol>
+ * 1. {@link #requestTrade} — creates a pending request and sends
+ *    clickable ACCEPT / DENY buttons to the target.
+ * 2. {@link #acceptTrade} — consumes the pending request, creates a
+ *    {@link TradeSession}, and opens the GUI via {@link TradeGui#open}.
+ * 3. Players interact inside the GUI until both click "Ready".
+ * 4. {@link TradeSession#executeTrade} swaps items and calls
+ *    {@link #removeActiveSession} to clean up.
  *
  * @see TradeSession
  * @see TradeGui
@@ -44,7 +35,7 @@ public class TradeManager {
     /** Maps a participant's UUID to their active {@link TradeSession}. */
     private final Map<UUID, TradeSession> activeSessions = new HashMap<>();
 
-    /** Maps the <em>target</em> player's UUID to the incoming trade request. */
+    /** Maps the target player's UUID to the incoming trade request. */
     private final Map<UUID, TradeRequest> pendingRequests = new HashMap<>();
 
     private TradeManager() {
@@ -62,10 +53,8 @@ public class TradeManager {
     /**
      * Sends a trade request from one player to another.
      *
-     * <p>
      * If either player is already in a trade, the request is rejected.
      * Otherwise, the target receives clickable ACCEPT / DENY chat buttons.
-     * </p>
      *
      * @param requester the player initiating the trade
      * @param target    the player being asked to trade
@@ -88,15 +77,19 @@ public class TradeManager {
         net.minecraft.network.chat.MutableComponent acceptBtn = net.minecraft.network.chat.Component
                 .literal("\u00a7a\u00a7l[ACCEPT]");
         acceptBtn.setStyle(net.minecraft.network.chat.Style.EMPTY
-                .withClickEvent(new net.minecraft.network.chat.ClickEvent.RunCommand("/trade accept"))
-                .withHoverEvent(new net.minecraft.network.chat.HoverEvent.ShowText(
+                .withClickEvent(new net.minecraft.network.chat.ClickEvent(
+                        net.minecraft.network.chat.ClickEvent.Action.RUN_COMMAND, "/trade accept"))
+                .withHoverEvent(new net.minecraft.network.chat.HoverEvent(
+                        net.minecraft.network.chat.HoverEvent.Action.SHOW_TEXT,
                         net.minecraft.network.chat.Component.literal("\u00a7aClick to accept"))));
 
         net.minecraft.network.chat.MutableComponent denyBtn = net.minecraft.network.chat.Component
                 .literal("\u00a7c\u00a7l[DENY]");
         denyBtn.setStyle(net.minecraft.network.chat.Style.EMPTY
-                .withClickEvent(new net.minecraft.network.chat.ClickEvent.RunCommand("/trade deny"))
-                .withHoverEvent(new net.minecraft.network.chat.HoverEvent.ShowText(
+                .withClickEvent(new net.minecraft.network.chat.ClickEvent(
+                        net.minecraft.network.chat.ClickEvent.Action.RUN_COMMAND, "/trade deny"))
+                .withHoverEvent(new net.minecraft.network.chat.HoverEvent(
+                        net.minecraft.network.chat.HoverEvent.Action.SHOW_TEXT,
                         net.minecraft.network.chat.Component.literal("\u00a7cClick to deny"))));
 
         message.append(acceptBtn).append(net.minecraft.network.chat.Component.literal(" ")).append(denyBtn);
@@ -107,11 +100,9 @@ public class TradeManager {
     /**
      * Accepts a pending trade request on behalf of the target player.
      *
-     * <p>
      * Validates that the request exists, has not expired, and that both
      * players are available. On success, creates a {@link TradeSession} and
      * opens {@link TradeGui} for both participants.
-     * </p>
      *
      * @param target the player accepting the trade
      * @param server the Minecraft server instance (used to resolve the requester)
@@ -200,10 +191,8 @@ public class TradeManager {
     /**
      * Cleans up all trade state for a player who has disconnected.
      *
-     * <p>
      * Cancels any active session (returning items to both players)
      * and removes any pending requests involving this player.
-     * </p>
      *
      * @param player the player who logged out
      */

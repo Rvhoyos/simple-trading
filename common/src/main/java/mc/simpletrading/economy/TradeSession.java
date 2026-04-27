@@ -14,24 +14,18 @@ import java.util.List;
 /**
  * Represents an active trade between two players.
  *
- * <p>
  * Each session owns a {@link TradeMenuContainer} (54-slot chest) and tracks
  * the ready state of both participants. The session enforces two anti-scam
  * rules:
- * </p>
- * <ol>
- * <li><b>Container change resets</b> — any item added or removed resets
- * both players to "Not Ready" via {@link #onContainerChanged()}.</li>
- * <li><b>Dual confirmation</b> — the trade only executes when
- * <em>both</em> players are ready simultaneously.</li>
- * </ol>
+ * - Container change resets — any item added or removed resets both players
+ *   to "Not Ready" via {@link #onContainerChanged()}.
+ * - Dual confirmation — the trade only executes when both players are ready
+ *   simultaneously.
  *
- * <h3>Item ownership</h3>
- * <p>
+ * Item ownership:
  * Columns 0–3 belong to Player A (the initiator, left side).
  * Columns 5–8 belong to Player B (the target, right side).
  * Column 4 is the centre divider and is managed by {@link TradeGui}.
- * </p>
  *
  * @see TradeGui
  * @see TradeManager
@@ -92,10 +86,8 @@ public class TradeSession {
     /**
      * Called when the container's contents change (item added/removed).
      *
-     * <p>
      * Resets both players to "Not Ready" and updates the GUI buttons
      * to prevent last-second item swaps after one player has confirmed.
-     * </p>
      */
     public void onContainerChanged() {
         if (completed)
@@ -165,11 +157,9 @@ public class TradeSession {
     /**
      * Swaps items between the two players.
      *
-     * <p>
      * Items from Player A's side (columns 0–3) are given to Player B
      * and vice versa. Both players hear a level-up sound and the GUI
      * is closed. The session is then removed from {@link TradeManager}.
-     * </p>
      */
     private void executeTrade() {
         List<ItemStack> itemsFromA = new ArrayList<>();
@@ -215,11 +205,9 @@ public class TradeSession {
     /**
      * Cancels the trade, returning all items to their original owners.
      *
-     * <p>
      * Called when a player closes the GUI (via
      * {@link mc.simpletrading.mixin.AbstractContainerMenuMixin})
      * or disconnects (via {@link TradeManager#handlePlayerLogout}).
-     * </p>
      */
     public void cancelTrade() {
         if (completed)

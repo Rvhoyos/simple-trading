@@ -19,7 +19,7 @@ legacyForge {
     runs {
         client {
             client()
-            programArguments.addAll '--username', 'Dev'
+            programArguments.addAll '--username', "Player${new Random().nextInt(10000)}"
         }
         server {
             server()

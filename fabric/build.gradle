@@ -49,7 +49,7 @@ loom {
             setConfigName("Fabric Client")
             ideConfigGenerated(true)
             runDir("run")
-            programArg "--username=Dev"
+            programArg "--username=Player${new Random().nextInt(10000)}"
         }
         server {
             server()

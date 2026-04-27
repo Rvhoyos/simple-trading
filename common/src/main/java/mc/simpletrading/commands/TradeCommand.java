@@ -12,18 +12,13 @@ import net.minecraft.network.chat.Component;
 /**
  * Registers and handles the {@code /trade} command tree.
  *
- * <h3>Sub-commands</h3>
- * <ul>
- * <li>{@code /trade <player>} — sends a trade request to the target
- * player.</li>
- * <li>{@code /trade accept} — accepts an incoming trade request.</li>
- * <li>{@code /trade deny} — denies an incoming trade request.</li>
- * </ul>
+ * Sub-commands:
+ * - {@code /trade <player>} — sends a trade request to the target player.
+ * - {@code /trade accept} — accepts an incoming trade request.
+ * - {@code /trade deny} — denies an incoming trade request.
  *
- * <p>
  * All sub-commands require the source to be a {@link ServerPlayer}.
  * Trade lifecycle is delegated to {@link TradeManager}.
- * </p>
  */
 public class TradeCommand {
 

@@ -9,15 +9,9 @@ import mc.simpletrading.economy.TradeManager;
 /**
  * Fabric mod initialiser for Simple Trading.
  *
- * <p>
- * Registers the following with Fabric API events:
- * </p>
- * <ul>
- * <li><b>Commands</b> — {@link TradeCommand} via the
- * {@code CommandRegistrationCallback}.</li>
- * <li><b>Player disconnect</b> — cleans up active trades and pending
- * requests via {@link TradeManager#handlePlayerLogout}.</li>
- * </ul>
+ * Registers commands via {@code CommandRegistrationCallback} and cleans up
+ * active trades and pending requests on player disconnect via
+ * {@link TradeManager#handlePlayerLogout}.
  *
  * @see SimpleTradingMod#init()
  */
