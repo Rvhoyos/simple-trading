@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "id": "simpletrading",
+  "id": "${mod_id}",
   "version": "${version}",
-  "name": "Simple Trading",
-  "description": "A server-side player-to-player trading mod with a secure chest-based GUI for Minecraft 1.21.11.",
+  "name": "${mod_name}",
+  "description": "${description}",
   "authors": [
-    "Rvhoyos"
+    "${mod_author}"
   ],
   "contact": {
     "sources": "https://github.com/Rvhoyos/SimpleTrading"
   },
-  "license": "Apache-2.0",
+  "license": "${license}",
   "icon": "assets/simpletrading/icon.png",
   "environment": "*",
   "entrypoints": {
@@ -19,12 +19,12 @@
     ]
   },
   "mixins": [
-    "simpletrading.mixins.json"
+    "${mod_id}.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.17.3",
-    "minecraft": "~1.21.11",
-    "java": ">=21",
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": "~1.20.1",
+    "java": ">=${java_version}",
     "fabric-api": "*"
   }
 }

@@ -1,16 +1,36 @@
 plugins {
-    id 'net.neoforged.moddev'
+    id 'multiloader-common'
+    id 'net.neoforged.moddev.legacyforge'
 }
 
-neoForge {
-    neoFormVersion = rootProject.neoform_version
-
-    parchment.minecraftVersion = rootProject.parchment_mc_version
-    parchment.mappingsVersion = rootProject.parchment_version
+legacyForge {
+    mcpVersion = minecraft_version
+    if (file("src/main/resources/META-INF/accesstransformer.cfg").exists()) {
+        accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
 }
 
 dependencies {
-    compileOnly "org.spongepowered:mixin:0.8.7"
-    compileOnly "io.github.llamalad7:mixinextras-common:$rootProject.mixin_extras"
-    compileOnly "com.mojang:brigadier:1.0.500"
+    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.5'
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+}
+
+configurations {
+    commonJava {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+    commonResources {
+        canBeResolved = false
+        canBeConsumed = true
+    }
+}
+
+artifacts {
+    commonJava sourceSets.main.java.sourceDirectories.singleFile
+    commonResources sourceSets.main.resources.sourceDirectories.singleFile
 }

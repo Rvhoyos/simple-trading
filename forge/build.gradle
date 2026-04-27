@@ -1,0 +1,69 @@
+plugins {
+    id 'multiloader-loader'
+    id 'net.neoforged.moddev.legacyforge'
+}
+
+legacyForge {
+    version = "${minecraft_version}-${forge_version}"
+
+    validateAccessTransformers = true
+
+    def at = project(':common').file('src/main/resources/META-INF/accesstransformer.cfg')
+    if (at.exists()) {
+        accessTransformers = ["src/main/resources/META-INF/accesstransformer.cfg"]
+    }
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
+    runs {
+        client {
+            client()
+            programArguments.addAll '--username', 'Dev'
+        }
+        server {
+            server()
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+sourceSets.main.resources.srcDir 'src/generated/resources'
+
+dependencies {
+    compileOnly project(":common")
+}
+
+// ---------------------------------------------------------------------------
+// Dev-mode mixin config discovery
+//
+// Forge 1.20.1 (FML 47.x) discovers mixin configs from JAR manifest
+// MixinConfigs attributes. In dev mode, FML creates a union SecureJar from
+// -Dfml.modFolders (classes dir + resources dir). The Mixin platform agent
+// reads the manifest via SecureJar.getPrimaryPath() -- which is the CLASSES
+// directory (listed first). But MANIFEST.MF lives in the RESOURCES directory.
+//
+// Fix: copy MANIFEST.MF into the classes output so the Mixin agent finds it
+// at SecureJar.getPrimaryPath()/META-INF/MANIFEST.MF.
+// ---------------------------------------------------------------------------
+tasks.named('compileJava').configure {
+    doLast {
+        def src = file('src/main/resources/META-INF/MANIFEST.MF')
+        if (src.exists()) {
+            def dest = new File(destinationDirectory.get().asFile, 'META-INF/MANIFEST.MF')
+            dest.parentFile.mkdirs()
+            dest.text = src.text
+        }
+    }
+}
+
+jar {
+    manifest.attributes([
+            "MixinConfigs": "${mod_id}.mixins.json"
+    ])
+}

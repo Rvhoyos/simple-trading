@@ -1,38 +1,61 @@
 plugins {
-    id 'fabric-loom'
+    id 'multiloader-loader'
+    id 'net.fabricmc.fabric-loom-remap'
 }
 
 dependencies {
-    minecraft "com.mojang:minecraft:${rootProject.minecraft_version}"
-    mappings loom.layered() {
+    minecraft "com.mojang:minecraft:${minecraft_version}"
+    mappings loom.layered {
         officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${rootProject.parchment_mc_version}:${rootProject.parchment_version}@zip")
+        parchment("org.parchmentmc.data:parchment-${parchment_minecraft}:${parchment_version}@zip")
     }
-    modImplementation "net.fabricmc:fabric-loader:${rootProject.fabric_loader_version}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_api_version}"
+    modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
 
-    // Common module
-    compileOnly project(':common')
+    implementation group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.1'
+    implementation project(":common")
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'org.lwjgl:lwjgl:3.3.1'
+        force 'org.lwjgl:lwjgl-glfw:3.3.1'
+        force 'org.lwjgl:lwjgl-openal:3.3.1'
+        force 'org.lwjgl:lwjgl-opengl:3.3.1'
+        force 'org.lwjgl:lwjgl-stb:3.3.1'
+        force 'org.lwjgl:lwjgl-tinyfd:3.3.1'
+        force 'org.lwjgl:lwjgl-jemalloc:3.3.1'
+    }
 }
 
 loom {
-    runs {
-        client {
-            runDir 'runs/client'
-            ideConfigGenerated true
-            programArg "--username=Player${new Random().nextInt(10000)}"
-        }
-        server {
-            runDir 'runs/server'
-            ideConfigGenerated true
+    if (project(":common").file("src/main/resources/${mod_id}.accesswidener").exists()) {
+        accessWidenerPath.set(project(":common").file("src/main/resources/${mod_id}.accesswidener"))
+    }
+
+    mixin {
+        defaultRefmapName.set("${mod_id}.refmap.json")
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
         }
     }
-}
 
-processResources {
-    inputs.property 'version', project.version
-
-    filesMatching('fabric.mod.json') {
-        expand version: inputs.properties.version
+    runs {
+        client {
+            client()
+            setConfigName("Fabric Client")
+            ideConfigGenerated(true)
+            runDir("run")
+            programArg "--username=Dev"
+        }
+        server {
+            server()
+            setConfigName("Fabric Server")
+            ideConfigGenerated(true)
+            runDir("run")
+        }
     }
 }
