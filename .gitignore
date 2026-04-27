@@ -29,6 +29,12 @@ run/
 logs/
 crash-reports/
 
+# Claude Code
+CLAUDE.md
+
+# Decompiled MC source cache
+.cache/
+
 # Misc
 *.log
 *.tmp
