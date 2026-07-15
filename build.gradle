@@ -1,5 +1,5 @@
 plugins {
-    id 'net.fabricmc.fabric-loom' version '1.16.1' apply false
+    id 'net.fabricmc.fabric-loom-remap' version '1.16.1' apply false
     id 'net.neoforged.moddev' version '2.0.141' apply false
 }
 
@@ -21,6 +21,10 @@ allprojects {
             name = 'SpongePowered'
             url = 'https://repo.spongepowered.org/repository/maven-public'
         }
+        maven {
+            name = 'ParchmentMC'
+            url = 'https://maven.parchmentmc.org'
+        }
     }
 }
 
@@ -34,13 +38,13 @@ subprojects {
 
         java {
             toolchain {
-                languageVersion = JavaLanguageVersion.of(25)
+                languageVersion = JavaLanguageVersion.of(21)
             }
             withSourcesJar()
         }
 
         tasks.withType(JavaCompile).configureEach {
-            it.options.release = 25
+            it.options.release = 21
         }
 
         // Include common sources in platform projects

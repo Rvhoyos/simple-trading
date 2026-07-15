@@ -5,6 +5,11 @@ plugins {
 neoForge {
     version = rootProject.neoforge_version
 
+    parchment {
+        minecraftVersion = rootProject.parchment_minecraft_version
+        mappingsVersion = rootProject.parchment_mappings_version
+    }
+
     runs {
         client {
             client()
