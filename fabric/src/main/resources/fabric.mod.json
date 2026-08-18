@@ -3,7 +3,7 @@
   "id": "simpletrading",
   "version": "${version}",
   "name": "Simple Trading",
-  "description": "A server-side player-to-player trading mod with a secure chest-based GUI for Minecraft 26.1.2.",
+  "description": "A server-side player-to-player trading mod with a secure chest-based GUI for Minecraft 26.2.",
   "authors": [
     "Rvhoyos"
   ],
@@ -23,7 +23,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.19.3",
-    "minecraft": "~26.1.2",
+    "minecraft": "~26.2",
     "java": ">=25",
     "fabric-api": "*"
   }

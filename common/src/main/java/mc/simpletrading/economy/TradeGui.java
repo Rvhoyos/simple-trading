@@ -101,7 +101,7 @@ public class TradeGui {
      * the initial "Not Ready" buttons for both players.
      */
     private static void populate(TradeMenuContainer container) {
-        ItemStack divider = new ItemStack(Items.BLACK_STAINED_GLASS_PANE);
+        ItemStack divider = new ItemStack(Items.STAINED_GLASS_PANE.black());
         divider.set(DataComponents.CUSTOM_NAME, Component.empty());
 
         for (int index : CENTER_COLUMN) {
@@ -116,8 +116,8 @@ public class TradeGui {
      * Updates a player's ready-state button in the trade GUI.
      *
      * <p>
-     * Uses a {@link Items#LIME_DYE} for "Ready" and a
-     * {@link Items#RED_DYE} for "Not Ready". The container's
+     * Uses a {@link Items#DYE} lime for "Ready" and a
+     * {@link Items#DYE} red for "Not Ready". The container's
      * {@link TradeMenuContainer#setUpdatingButtons} flag is toggled
      * so that the cosmetic change does not trigger
      * {@link TradeSession#onContainerChanged}.
@@ -132,7 +132,7 @@ public class TradeGui {
         int slot = isPlayerA ? BUTTON_A : BUTTON_B;
         String name = isPlayerA ? "Player A" : "Player B";
 
-        ItemStack button = new ItemStack(isReady ? Items.LIME_DYE : Items.RED_DYE);
+        ItemStack button = new ItemStack(isReady ? Items.DYE.lime() : Items.DYE.red());
         button.set(DataComponents.CUSTOM_NAME,
                 Component.literal(isReady ? "\u00a7a" + name + " is Ready" : "\u00a7c" + name + " is Not Ready"));
 
