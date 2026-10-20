@@ -7,7 +7,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerInput;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -44,7 +44,7 @@ public class AbstractContainerMenuMixin {
      * {@link TradeGui#onClick} and cancels vanilla handling when appropriate.
      */
     @Inject(method = "clicked", at = @At("HEAD"), cancellable = true)
-    private void simpletrading$interceptClick(int slotId, int button, ClickType clickType, Player player,
+    private void simpletrading$interceptClick(int slotId, int button, ContainerInput clickType, Player player,
             CallbackInfo ci) {
         if ((Object) this instanceof ChestMenu chestMenu) {
             Container container = ((ChestMenuMixin) chestMenu).getContainer();

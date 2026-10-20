@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ChestMenu;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerInput;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemLore;
@@ -101,7 +101,7 @@ public class TradeGui {
      * the initial "Not Ready" buttons for both players.
      */
     private static void populate(TradeMenuContainer container) {
-        ItemStack divider = new ItemStack(Items.BLACK_STAINED_GLASS_PANE);
+        ItemStack divider = new ItemStack(Items.STAINED_GLASS_PANE.black());
         divider.set(DataComponents.CUSTOM_NAME, Component.empty());
 
         for (int index : CENTER_COLUMN) {
@@ -116,8 +116,8 @@ public class TradeGui {
      * Updates a player's ready-state button in the trade GUI.
      *
      * <p>
-     * Uses a {@link Items#LIME_DYE} for "Ready" and a
-     * {@link Items#RED_DYE} for "Not Ready". The container's
+     * Uses a {@link Items#DYE} lime for "Ready" and a
+     * {@link Items#DYE} red for "Not Ready". The container's
      * {@link TradeMenuContainer#setUpdatingButtons} flag is toggled
      * so that the cosmetic change does not trigger
      * {@link TradeSession#onContainerChanged}.
@@ -132,7 +132,7 @@ public class TradeGui {
         int slot = isPlayerA ? BUTTON_A : BUTTON_B;
         String name = isPlayerA ? "Player A" : "Player B";
 
-        ItemStack button = new ItemStack(isReady ? Items.LIME_DYE : Items.RED_DYE);
+        ItemStack button = new ItemStack(isReady ? Items.DYE.lime() : Items.DYE.red());
         button.set(DataComponents.CUSTOM_NAME,
                 Component.literal(isReady ? "\u00a7a" + name + " is Ready" : "\u00a7c" + name + " is Not Ready"));
 
@@ -152,10 +152,10 @@ public class TradeGui {
      * Enforces the following rules:
      * </p>
      * <ol>
-     * <li>{@link ClickType#PICKUP_ALL} (double-click) is always cancelled to
+     * <li>{@link ContainerInput#PICKUP_ALL} (double-click) is always cancelled to
      * prevent vanilla from sweeping items across both sides.</li>
      * <li>Clicks on the centre column are consumed; only the owner's
-     * ready button responds to {@link ClickType#PICKUP}.</li>
+     * ready button responds to {@link ContainerInput#PICKUP}.</li>
      * <li>Players may only interact with their own side (A → cols 0–3,
      * B → cols 5–8).</li>
      * <li>Shift-clicks from the player's own inventory are routed to their
@@ -168,12 +168,12 @@ public class TradeGui {
      * @param clickType the type of click performed
      * @return {@code true} if vanilla handling should be cancelled
      */
-    public static boolean onClick(ServerPlayer player, TradeMenuContainer container, int slotId, ClickType clickType) {
+    public static boolean onClick(ServerPlayer player, TradeMenuContainer container, int slotId, ContainerInput clickType) {
         TradeSession session = container.getSession();
         if (session == null)
             return false;
 
-        if (clickType == ClickType.PICKUP_ALL) {
+        if (clickType == ContainerInput.PICKUP_ALL) {
             return true;
         }
 
@@ -187,7 +187,7 @@ public class TradeGui {
 
             if (col == 4) {
                 if ((isPlayerA && slotId == BUTTON_A) || (!isPlayerA && slotId == BUTTON_B)) {
-                    if (clickType == ClickType.PICKUP) {
+                    if (clickType == ContainerInput.PICKUP) {
                         session.toggleReady(player);
                     }
                 }
@@ -208,7 +208,7 @@ public class TradeGui {
             return false;
         }
 
-        if (clickType == ClickType.QUICK_MOVE) {
+        if (clickType == ContainerInput.QUICK_MOVE) {
             handleShiftClick(player, container, slotId, isPlayerA);
             return true;
         }
