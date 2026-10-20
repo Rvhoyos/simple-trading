@@ -1,6 +1,5 @@
 # Compiled output
 *.class
-*.jar
 *.war
 
 # Gradle
