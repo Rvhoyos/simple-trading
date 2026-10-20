@@ -1,7 +1,7 @@
 # Simple Trading
 
-A lightweight, server-side player-to-player trading mod for **Minecraft 1.21.8**.  
-Supports both **Fabric** and **NeoForge**.
+A server-side player-to-player trading mod for Minecraft 26.3.
+Supports both Fabric and NeoForge.
 
 ## Features
 
@@ -24,8 +24,8 @@ Supports both **Fabric** and **NeoForge**.
 
 Drop the mod JAR into your server's `mods/` folder:
 
-- **Fabric**: requires [Fabric Loader](https://fabricmc.net/) >= 0.17.2 and [Fabric API](https://modrinth.com/mod/fabric-api)
-- **NeoForge**: requires [NeoForge](https://neoforged.net/) >= 21.8
+- **Fabric**: requires [Fabric Loader](https://fabricmc.net/) >= 0.19.3 and [Fabric API](https://modrinth.com/mod/fabric-api)
+- **NeoForge**: requires [NeoForge](https://neoforged.net/) >= 26.3
 
 ## Building from Source
 

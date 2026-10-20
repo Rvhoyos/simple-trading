@@ -10,19 +10,16 @@ import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 /**
  * NeoForge event handlers for Simple Trading.
  *
- * <p>
  * All methods are static and annotated with {@code @SubscribeEvent}.
  * The class is registered on the {@code NeoForge.EVENT_BUS} by
  * {@link SimpleTradingNeoForge}.
- * </p>
  *
- * <h3>Events handled</h3>
- * <ul>
- * <li>{@link RegisterCommandsEvent} — registers the {@code /trade}
- * command.</li>
- * <li>{@link PlayerEvent.PlayerLoggedOutEvent} — cleans up trades on
- * disconnect.</li>
- * </ul>
+ * Events handled:
+ *
+ * - {@link RegisterCommandsEvent}: registers the {@code /trade}
+ *   command.
+ * - {@link PlayerEvent.PlayerLoggedOutEvent}: cleans up trades on
+ *   disconnect.
  */
 public class TradingEvents {
 

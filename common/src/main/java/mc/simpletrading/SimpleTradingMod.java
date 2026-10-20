@@ -6,11 +6,9 @@ import org.apache.logging.log4j.LogManager;
 /**
  * Main entry point for the Simple Trading mod.
  *
- * <p>
  * Provides the mod ID constant and a shared logger used across all modules.
  * The {@link #init()} method is called by each platform-specific entry point
  * (Fabric / NeoForge) during server startup.
- * </p>
  *
  * @see mc.simpletrading.fabric.SimpleTradingFabric
  * @see mc.simpletrading.neoforge.SimpleTradingNeoForge

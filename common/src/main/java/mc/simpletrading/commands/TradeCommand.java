@@ -12,18 +12,15 @@ import net.minecraft.network.chat.Component;
 /**
  * Registers and handles the {@code /trade} command tree.
  *
- * <h3>Sub-commands</h3>
- * <ul>
- * <li>{@code /trade <player>} — sends a trade request to the target
- * player.</li>
- * <li>{@code /trade accept} — accepts an incoming trade request.</li>
- * <li>{@code /trade deny} — denies an incoming trade request.</li>
- * </ul>
+ * Sub-commands:
  *
- * <p>
+ * - {@code /trade <player>}: sends a trade request to the target
+ *   player.
+ * - {@code /trade accept}: accepts an incoming trade request.
+ * - {@code /trade deny}: denies an incoming trade request.
+ *
  * All sub-commands require the source to be a {@link ServerPlayer}.
  * Trade lifecycle is delegated to {@link TradeManager}.
- * </p>
  */
 public class TradeCommand {
 
@@ -44,7 +41,7 @@ public class TradeCommand {
     }
 
     /**
-     * Handles {@code /trade <player>} — sends a trade request.
+     * Handles {@code /trade <player>}: sends a trade request.
      * Prevents self-trading and delegates to {@link TradeManager#requestTrade}.
      */
     private static int requestTrade(CommandContext<CommandSourceStack> context) {
@@ -65,7 +62,7 @@ public class TradeCommand {
     }
 
     /**
-     * Handles {@code /trade accept} — accepts a pending trade request.
+     * Handles {@code /trade accept}: accepts a pending trade request.
      * Delegates to {@link TradeManager#acceptTrade}.
      */
     private static int acceptTrade(CommandContext<CommandSourceStack> context) {
@@ -79,7 +76,7 @@ public class TradeCommand {
     }
 
     /**
-     * Handles {@code /trade deny} — denies a pending trade request.
+     * Handles {@code /trade deny}: denies a pending trade request.
      * Delegates to {@link TradeManager#denyTrade}.
      */
     private static int denyTrade(CommandContext<CommandSourceStack> context) {

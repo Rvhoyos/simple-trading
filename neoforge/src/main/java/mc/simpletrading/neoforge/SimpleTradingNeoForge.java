@@ -8,11 +8,9 @@ import mc.simpletrading.SimpleTradingMod;
 /**
  * NeoForge mod entry point for Simple Trading.
  *
- * <p>
  * Annotated with {@code @Mod} so NeoForge discovers and instantiates it
  * automatically. Runs common init and registers {@link TradingEvents} on
  * the NeoForge event bus.
- * </p>
  *
  * @see SimpleTradingMod#init()
  * @see TradingEvents

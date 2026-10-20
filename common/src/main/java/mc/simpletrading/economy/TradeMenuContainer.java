@@ -6,17 +6,13 @@ import net.minecraft.world.item.ItemStack;
 /**
  * A {@link SimpleContainer} subclass that backs the trade GUI chest.
  *
- * <p>
  * Holds a reference to the owning {@link TradeSession} so that any
  * inventory change can notify the session (which resets both players'
  * ready states to prevent last-second scam swaps).
- * </p>
  *
- * <p>
  * The {@link #updatingButtons} flag allows {@link TradeGui} to update
  * the ready-state button items without triggering
  * {@link TradeSession#onContainerChanged()}.
- * </p>
  *
  * @see TradeSession
  * @see TradeGui
@@ -52,11 +48,9 @@ public class TradeMenuContainer extends SimpleContainer {
     /**
      * Sets the button-update guard flag.
      *
-     * <p>
-     * While {@code true}, calls to {@link #setChanged()} will <em>not</em>
+     * While {@code true}, calls to {@link #setChanged()} will not
      * propagate to {@link TradeSession#onContainerChanged()}, allowing
      * cosmetic button updates without resetting the ready states.
-     * </p>
      *
      * @param updating {@code true} to suppress change notifications
      */
@@ -67,10 +61,8 @@ public class TradeMenuContainer extends SimpleContainer {
     /**
      * Called whenever a slot in this container is modified.
      *
-     * <p>
      * Delegates to the session's {@link TradeSession#onContainerChanged()}
      * unless the {@link #updatingButtons} flag is set or no session exists.
-     * </p>
      */
     @Override
     public void setChanged() {

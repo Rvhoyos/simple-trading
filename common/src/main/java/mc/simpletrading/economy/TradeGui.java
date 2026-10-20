@@ -20,29 +20,23 @@ import java.util.List;
 /**
  * Server-side GUI controller for the trade window.
  *
- * <p>
  * The trade GUI is presented as a standard 6-row chest ({@link ChestMenu}).
  * The centre column (column 4) acts as a divider and contains the
- * ready/not-ready buttons for each player. Columns 0–3 belong to Player A
- * (the trade initiator) and columns 5–8 belong to Player B (the target).
- * </p>
+ * ready/not-ready buttons for each player. Columns 0 to 3 belong to Player A
+ * (the trade initiator) and columns 5 to 8 belong to Player B (the target).
  *
- * <h3>Layout (9 × 6 grid)</h3>
- * 
- * <pre>
- *   A A A A | D | B B B B
- *   A A A A | D | B B B B
- *   A A A A |[A]| B B B B   ← Player A's ready button (slot 22)
- *   A A A A |[B]| B B B B   ← Player B's ready button (slot 31)
- *   A A A A | D | B B B B
- *   A A A A | D | B B B B
- * </pre>
+ * Layout (9 x 6 grid):
  *
- * <p>
+ *   A A A A | D | B B B B
+ *   A A A A | D | B B B B
+ *   A A A A |[A]| B B B B   Player A's ready button, slot 22
+ *   A A A A |[B]| B B B B   Player B's ready button, slot 31
+ *   A A A A | D | B B B B
+ *   A A A A | D | B B B B
+ *
  * Click interception is handled via
  * {@link mc.simpletrading.mixin.AbstractContainerMenuMixin}, which delegates
  * to {@link #onClick} for any chest backed by a {@link TradeMenuContainer}.
- * </p>
  *
  * @see TradeSession
  * @see TradeMenuContainer
@@ -61,11 +55,9 @@ public class TradeGui {
     /**
      * Opens the trade GUI for both participants of the given session.
      *
-     * <p>
      * Populates the shared {@link TradeMenuContainer} with divider panes
      * and initial "Not Ready" buttons, then opens a {@link ChestMenu} for
      * each player with a personalised title.
-     * </p>
      *
      * @param session the active trade session to display
      */
@@ -115,13 +107,11 @@ public class TradeGui {
     /**
      * Updates a player's ready-state button in the trade GUI.
      *
-     * <p>
      * Uses a {@link Items#DYE} lime for "Ready" and a
      * {@link Items#DYE} red for "Not Ready". The container's
      * {@link TradeMenuContainer#setUpdatingButtons} flag is toggled
      * so that the cosmetic change does not trigger
      * {@link TradeSession#onContainerChanged}.
-     * </p>
      *
      * @param container the shared trade container
      * @param isPlayerA {@code true} to update Player A's button, {@code false} for
@@ -148,19 +138,16 @@ public class TradeGui {
     /**
      * Processes a click event inside the trade GUI.
      *
-     * <p>
      * Enforces the following rules:
-     * </p>
-     * <ol>
-     * <li>{@link ContainerInput#PICKUP_ALL} (double-click) is always cancelled to
-     * prevent vanilla from sweeping items across both sides.</li>
-     * <li>Clicks on the centre column are consumed; only the owner's
-     * ready button responds to {@link ContainerInput#PICKUP}.</li>
-     * <li>Players may only interact with their own side (A → cols 0–3,
-     * B → cols 5–8).</li>
-     * <li>Shift-clicks from the player's own inventory are routed to their
-     * designated side via {@link #handleShiftClick}.</li>
-     * </ol>
+     *
+     * 1. {@link ContainerInput#PICKUP_ALL} (double-click) is always cancelled to
+     *   prevent vanilla from sweeping items across both sides.
+     * 2. Clicks on the centre column are consumed; only the owner's
+     *   ready button responds to {@link ContainerInput#PICKUP}.
+     * 3. Players may only interact with their own side (A uses columns 0 to 3,
+     *   B uses columns 5 to 8).
+     * 4. Shift-clicks from the player's own inventory are routed to their
+     *   designated side via {@link #handleShiftClick}.
      *
      * @param player    the player who clicked
      * @param container the shared trade container
@@ -220,10 +207,8 @@ public class TradeGui {
      * Moves an item from the player's bottom inventory into their designated
      * side of the trade chest via shift-click.
      *
-     * <p>
      * First attempts to stack with existing identical items, then fills
      * empty slots. Only the player's own columns are targeted.
-     * </p>
      *
      * @param player     the player performing the shift-click
      * @param container  the shared trade container
